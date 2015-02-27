@@ -83,6 +83,18 @@ Host::ThreadCreated (const char *thread_name)
     Host::SetShortThreadName (LLDB_INVALID_PROCESS_ID, LLDB_INVALID_THREAD_ID, thread_name, 16);
 }
 
+// Debian kFreeBSD uses the FreeBSD kernel with a GNU libc
+#ifdef __GLIBC__
+static inline void *
+reallocf(void *ptr, size_t size)
+{
+    void *rv = realloc(ptr, size);
+    if (rv == NULL)
+        free(ptr);
+    return rv;
+}
+#endif
+
 std::string
 Host::GetThreadName (lldb::pid_t pid, lldb::tid_t tid)
 {
