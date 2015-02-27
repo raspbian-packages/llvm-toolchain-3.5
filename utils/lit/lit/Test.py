@@ -27,7 +27,7 @@ class ResultCode(object):
 PASS        = ResultCode('PASS', False)
 XFAIL       = ResultCode('XFAIL', False)
 FAIL        = ResultCode('FAIL', True)
-XPASS       = ResultCode('XPASS', True)
+XPASS       = ResultCode('XPASS', False)
 UNRESOLVED  = ResultCode('UNRESOLVED', True)
 UNSUPPORTED = ResultCode('UNSUPPORTED', False)
 
