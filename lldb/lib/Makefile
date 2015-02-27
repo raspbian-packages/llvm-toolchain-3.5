@@ -175,6 +175,10 @@ ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux GNU GNU/kFreeBSD))
     # Link in python
     LLVMLibsOptions += $(PYTHON_BUILD_FLAGS) -lrt -ledit -lncurses -lpanel
     LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT)
+    ifneq (,$(filter $(shell dpkg-architecture -qDEB_HOST_ARCH), mips mipsel powerpc powerpcspe))
+     # Link GCC atomic helper library
+     LLVMLibsOptions += -latomic
+    endif
 endif
 
 ifeq ($(HOST_OS),FreeBSD)
