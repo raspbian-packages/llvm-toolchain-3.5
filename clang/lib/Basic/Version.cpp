@@ -15,6 +15,7 @@
 #include "clang/Basic/LLVM.h"
 #include "clang/Config/config.h"
 #include "llvm/Support/raw_ostream.h"
+#include "clang/Debian/debian_path.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -125,7 +126,7 @@ std::string getClangToolFullVersion(StringRef ToolName) {
 #ifdef CLANG_VENDOR
   OS << CLANG_VENDOR;
 #endif
-  OS << ToolName << " version " CLANG_VERSION_STRING " "
+  OS << ToolName << " version " CLANG_VERSION_STRING "-" DEB_PATCHSETVERSION " "
      << getClangFullRepositoryVersion();
 
   // If vendor supplied, include the base LLVM version as well.
