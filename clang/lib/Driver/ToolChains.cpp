@@ -3271,6 +3271,11 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
     return;
   }
 
+  // Force the inclusion of the gcc headers (objc/objc.h)
+  addExternCSystemIncludeIfExists(
+     DriverArgs, CC1Args, GCCInstallation.getInstallPath() + "/include");
+
+
   // Lacking those, try to detect the correct set of system includes for the
   // target triple.
 
