@@ -25,7 +25,7 @@ ifeq ($(HOST_OS),Darwin)
 DIRS += debugserver
 endif
 
-ifeq ($(HOST_OS),Linux)
+ifneq (,$(strip $(filter $(HOST_OS), Linux GNU GNU/kFreeBSD)))
 DIRS += lldb-mi
 endif
 
