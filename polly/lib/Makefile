@@ -13,7 +13,7 @@ LOADABLE_MODULE = 1
 CPP.Flags += $(POLLY_INC)
 LD.Flags += $(POLLY_LD) $(POLLY_LIB)
 
-LIBS += $(POLLY_LD) $(POLLY_LIB)
+LIBS += $(POLLY_LD) $(POLLY_LIB) -ljsoncpp
 
 include $(LEVEL)/Makefile.config
 
@@ -41,9 +41,9 @@ endif
 ISL_CODEGEN_FILES= CodeGen/IslAst.cpp \
                    CodeGen/IslCodeGeneration.cpp
 
-POLLY_JSON_FILES= JSON/json_reader.cpp \
-		  JSON/json_value.cpp \
-		  JSON/json_writer.cpp
+# POLLY_JSON_FILES= JSON/json_reader.cpp \
+# 		  JSON/json_value.cpp \
+# 		  JSON/json_writer.cpp
 
 SOURCES= Polly.cpp \
 	 Support/GICHelper.cpp \
