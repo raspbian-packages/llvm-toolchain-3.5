@@ -185,11 +185,11 @@ void test18() {
 
   ptr = __builtin___memccpy_chk(dst, src, '\037', sizeof(src), sizeof(dst));
   result = __builtin___strlcpy_chk(dst, src, sizeof(src), sizeof(dst));
-  result = __builtin___strlcat_chk(dst, src, sizeof(src), sizeof(dst));
+//  result = __builtin___strlcat_chk(dst, src, sizeof(src), sizeof(dst));
 
   ptr = __builtin___memccpy_chk(dst, src, '\037', sizeof(src));      // expected-error {{too few arguments to function call}}
   ptr = __builtin___strlcpy_chk(dst, src, sizeof(src), sizeof(dst)); // expected-warning {{incompatible integer to pointer conversion}}
-  ptr = __builtin___strlcat_chk(dst, src, sizeof(src), sizeof(dst)); // expected-warning {{incompatible integer to pointer conversion}}
+//  ptr = __builtin___strlcat_chk(dst, src, sizeof(src), sizeof(dst)); // expected-warning {{incompatible integer to pointer conversion}}
 }
 
 void no_ms_builtins() {
