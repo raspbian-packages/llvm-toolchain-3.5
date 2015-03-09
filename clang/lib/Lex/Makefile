@@ -17,7 +17,9 @@ include $(CLANG_LEVEL)/../../Makefile.config
 LIBRARYNAME := clangLex
 
 ifeq ($(ARCH),PowerPC)
+ifneq ($(shell dpkg-architecture -qDEB_HOST_ARCH),powerpcspe)
 CXX.Flags += -maltivec
+endif
 endif
 
 include $(CLANG_LEVEL)/Makefile
