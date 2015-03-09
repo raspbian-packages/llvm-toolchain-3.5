@@ -635,7 +635,7 @@ StringRef tools::arm::getARMFloatABI(const Driver &D, const ArgList &Args,
         FloatABI = "hard";
         break;
       case llvm::Triple::GNUEABI:
-        FloatABI = "softfp";
+        FloatABI = "soft";
         break;
       case llvm::Triple::EABIHF:
         FloatABI = "hard";
