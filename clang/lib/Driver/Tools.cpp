@@ -7223,13 +7223,14 @@ static StringRef getLinuxDynamicLinker(const ArgList &Args,
                ? "/lib64/ld-linux-mipsn8.so.1" : "/lib64/ld.so.1";
   } else if (ToolChain.getArch() == llvm::Triple::ppc)
     return "/lib/ld.so.1";
-  else if (ToolChain.getArch() == llvm::Triple::ppc64 ||
-           ToolChain.getArch() == llvm::Triple::systemz)
+  else if (ToolChain.getArch() == llvm::Triple::ppc64)
     return "/lib64/ld64.so.1";
   else if (ToolChain.getArch() == llvm::Triple::ppc64le)
     return "/lib64/ld64.so.2";
   else if (ToolChain.getArch() == llvm::Triple::sparcv9)
     return "/lib64/ld-linux.so.2";
+  else if (ToolChain.getArch() == llvm::Triple::systemz)
+    return "/lib/ld64.so.1";
   else if (ToolChain.getArch() == llvm::Triple::x86_64 &&
            ToolChain.getTriple().getEnvironment() == llvm::Triple::GNUX32)
     return "/libx32/ld-linux-x32.so.2";
