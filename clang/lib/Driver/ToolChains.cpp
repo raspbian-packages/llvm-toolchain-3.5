@@ -2990,6 +2990,10 @@ static std::string getMultiarchTriple(const llvm::Triple &TargetTriple,
     if (llvm::sys::fs::exists(SysRoot + "/lib/powerpc64le-linux-gnu"))
       return "powerpc64le-linux-gnu";
     return TargetTriple.str();
+  case llvm::Triple::systemz:
+    if (llvm::sys::fs::exists(SysRoot + "/lib/s390x-linux-gnu"))
+      return "s390x-linux-gnu";
+    return TargetTriple.str();
   }
 }
 
@@ -3361,6 +3365,9 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
   const StringRef PPC64LEMultiarchIncludeDirs[] = {
     "/usr/include/powerpc64le-linux-gnu"
   };
+  const StringRef SYSTEMZMultiarchIncludeDirs[] = {
+    "/usr/include/s390x-linux-gnu"
+  };
   ArrayRef<StringRef> MultiarchIncludeDirs;
   if (getTriple().getArch() == llvm::Triple::x86_64) {
     MultiarchIncludeDirs = X86_64MultiarchIncludeDirs;
@@ -3390,6 +3397,8 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
     MultiarchIncludeDirs = PPC64MultiarchIncludeDirs;
   } else if (getTriple().getArch() == llvm::Triple::ppc64le) {
     MultiarchIncludeDirs = PPC64LEMultiarchIncludeDirs;
+  } else if (getTriple().getArch() == llvm::Triple::systemz) {
+    MultiarchIncludeDirs = SYSTEMZMultiarchIncludeDirs;
   }
   for (StringRef Dir : MultiarchIncludeDirs) {
     if (llvm::sys::fs::exists(SysRoot + Dir)) {
