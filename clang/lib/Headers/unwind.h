@@ -23,9 +23,6 @@
 
 /* See "Data Definitions for libgcc_s" in the Linux Standard Base.*/
 
-#ifndef __CLANG_UNWIND_H
-#define __CLANG_UNWIND_H
-
 #if __has_include_next(<unwind.h>)
 /* Darwin (from 11.x on) and libunwind provide an unwind.h. If that's available,
  * use it. libunwind wraps some of its definitions in #ifdef _GNU_SOURCE,
@@ -52,6 +49,9 @@
 #  undef _SHOULD_UNDEFINE_GNU_SOURCE
 # endif
 #else
+
+#ifndef __CLANG_UNWIND_H
+#define __CLANG_UNWIND_H
 
 #include <stdint.h>
 
@@ -275,6 +275,7 @@ _Unwind_Ptr _Unwind_GetTextRelBase(struct _Unwind_Context *);
 }
 #endif
 
+#endif /* __CLANG_UNWIND_H */
+
 #endif
 
-#endif /* __CLANG_UNWIND_H */
