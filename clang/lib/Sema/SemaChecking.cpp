@@ -871,9 +871,10 @@ bool Sema::CheckFunctionCall(FunctionDecl *FDecl, CallExpr *TheCall,
     return false;
 
   // Handle memory setting and copying functions.
-  if (CMId == Builtin::BIstrlcpy || CMId == Builtin::BIstrlcat)
-    CheckStrlcpycatArguments(TheCall, FnInfo);
-  else if (CMId == Builtin::BIstrncat)
+//  if (CMId == Builtin::BIstrlcpy || CMId == Builtin::BIstrlcat)
+//    CheckStrlcpycatArguments(TheCall, FnInfo);
+//  else
+  if (CMId == Builtin::BIstrncat)
     CheckStrncatArguments(TheCall, FnInfo);
   else
     CheckMemaccessArguments(TheCall, CMId, FnInfo);
