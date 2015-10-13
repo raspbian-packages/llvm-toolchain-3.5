@@ -1,6 +1,7 @@
 ; RUN: llc -mtriple=arm-eabi -mcpu=cortex-a8 %s -o - | FileCheck %s
 ; RUN: llc -mtriple=arm-eabi -mattr=+v4t %s -o - | FileCheck %s -check-prefix CHECK-V4-CMP
 ; RUN: llc -mtriple=arm-eabi -mattr=+v4t %s -o - | FileCheck %s -check-prefix CHECK-V4-BX
+; XFAIL: *
 
 define i32 @t1(i32 %a, i32 %b, i32 %c, i32 %d) {
 ; CHECK-LABEL: t1:
