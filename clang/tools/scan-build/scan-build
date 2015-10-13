@@ -1595,7 +1595,7 @@ if (!@ARGV and !$RequestDisplayHelp) {
 
 # Find 'clang'
 if (!defined $AnalyzerDiscoveryMethod) {
-  $Clang = Cwd::realpath("$RealBin/bin/clang");
+  $Clang = Cwd::realpath("/usr/lib/llvm-3.5/bin/clang");
   if (!defined $Clang || ! -x $Clang) {
     $Clang = Cwd::realpath("$RealBin/clang");
   }
