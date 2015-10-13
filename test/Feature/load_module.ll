@@ -3,6 +3,7 @@
 ; RUN:   -disable-output 2>&1 | grep Hello
 ; REQUIRES: loadable_module
 ; FIXME: On Cygming, it might fail without building LLVMHello manually.
+; XFAIL: *
 
 @junk = global i32 0
 
