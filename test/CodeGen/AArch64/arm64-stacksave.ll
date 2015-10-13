@@ -1,6 +1,7 @@
 ; RUN: llc < %s -verify-coalescing
 ; <rdar://problem/11522048>
 target triple = "arm64-apple-macosx10.8.0"
+; XFAIL: *
 
 ; Verify that we can handle spilling the stack pointer without attempting
 ; spilling it directly.

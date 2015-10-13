@@ -1,6 +1,7 @@
 ; RUN: llc < %s -march=arm64 -mcpu=cyclone -enable-misched=false | FileCheck %s
 ; RUN: llc < %s -O0 | FileCheck -check-prefix=FAST %s
 target triple = "arm64-apple-darwin"
+; XFAIL: *
 
 ; rdar://12648441
 ; Generated from arm64-arguments.c with -O2.

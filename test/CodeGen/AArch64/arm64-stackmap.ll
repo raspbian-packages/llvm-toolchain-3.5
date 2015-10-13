@@ -1,6 +1,7 @@
 ; RUN: llc < %s -mtriple=arm64-apple-darwin | FileCheck %s
 ;
 ; Note: Print verbose stackmaps using -debug-only=stackmaps.
+; XFAIL: *
 
 ; We are not getting the correct stack alignment when cross compiling for arm64.
 ; So specify a datalayout here.

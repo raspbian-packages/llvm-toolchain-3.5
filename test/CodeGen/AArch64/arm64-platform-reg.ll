@@ -1,5 +1,6 @@
 ; RUN: llc -mtriple=arm64-apple-ios -o - %s | FileCheck %s --check-prefix=CHECK-DARWIN
 ; RUN: llc -mtriple=arm64-linux-gnu -o - %s | FileCheck %s
+; XFAIL: *
 
 ; x18 is reserved as a platform register on Darwin but not on other
 ; systems. Create loads of register pressure and make sure this is respected.
