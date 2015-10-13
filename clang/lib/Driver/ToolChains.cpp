@@ -1336,7 +1336,7 @@ bool Generic_GCC::GCCInstallationDetector::getBiarchSibling(Multilib &M) const {
     "x86_64-linux-gnu", "x86_64-unknown-linux-gnu", "x86_64-pc-linux-gnu",
     "x86_64-redhat-linux6E", "x86_64-redhat-linux", "x86_64-suse-linux",
     "x86_64-manbo-linux-gnu", "x86_64-linux-gnu", "x86_64-slackware-linux",
-    "x86_64-linux-android", "x86_64-unknown-linux"
+    "x86_64-linux-android", "x86_64-unknown-linux", "x86_64-kfreebsd-gnu"
   };
   static const char *const X32LibDirs[] = { "/libx32" };
   static const char *const X86LibDirs[] = { "/lib32", "/lib" };
@@ -1344,7 +1344,8 @@ bool Generic_GCC::GCCInstallationDetector::getBiarchSibling(Multilib &M) const {
     "i686-linux-gnu", "i686-pc-linux-gnu", "i486-linux-gnu", "i386-linux-gnu",
     "i386-redhat-linux6E", "i686-redhat-linux", "i586-redhat-linux",
     "i386-redhat-linux", "i586-suse-linux", "i486-slackware-linux",
-    "i686-montavista-linux", "i686-linux-android", "i586-linux-gnu"
+    "i686-montavista-linux", "i686-linux-android", "i586-linux-gnu",
+    "i386-kfreebsd-gnu", "i486-kfreebsd-gnu", "i586-kfreebsd-gnu"
   };
 
   static const char *const MIPSLibDirs[] = { "/lib" };
@@ -2934,12 +2935,17 @@ static std::string getMultiarchTriple(const llvm::Triple &TargetTriple,
   case llvm::Triple::x86:
     if (llvm::sys::fs::exists(SysRoot + "/lib/i386-linux-gnu"))
       return "i386-linux-gnu";
+    if (llvm::sys::fs::exists(SysRoot + "/lib/i386-kfreebsd-gnu"))
+      return "i386-kfreebsd-gnu";
+
     return TargetTriple.str();
   case llvm::Triple::x86_64:
     // We don't want this for x32, otherwise it will match x86_64 libs
     if (TargetTriple.getEnvironment() != llvm::Triple::GNUX32 &&
         llvm::sys::fs::exists(SysRoot + "/lib/x86_64-linux-gnu"))
       return "x86_64-linux-gnu";
+    if (llvm::sys::fs::exists(SysRoot + "/lib/x86_64-kfreebsd-gnu"))
+      return "x86_64-kfreebsd-gnu";
     return TargetTriple.str();
   case llvm::Triple::arm64:
   case llvm::Triple::aarch64:
@@ -3247,6 +3253,10 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
   if (DriverArgs.hasArg(options::OPT_nostdinc))
     return;
 
+  // Under Debian, clang headers are installed into
+  // '/usr/include/clang/VERSION/include/'
+  addSystemInclude(DriverArgs, CC1Args, "/usr/include/clang/" + std::string(CLANG_VERSION_STRING) + "/include/");
+
   if (!DriverArgs.hasArg(options::OPT_nostdlibinc))
     addSystemInclude(DriverArgs, CC1Args, SysRoot + "/usr/local/include");
 
@@ -3299,6 +3309,9 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
   const StringRef X86_64MultiarchIncludeDirs[] = {
     "/usr/include/x86_64-linux-gnu",
 
+    // GNU/kFreeBSD
+    "/usr/include/x86_64-kfreebsd-gnu",
+
     // FIXME: These are older forms of multiarch. It's not clear that they're
     // in use in any released version of Debian, so we should consider
     // removing them.
@@ -3306,6 +3319,9 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
   };
   const StringRef X86MultiarchIncludeDirs[] = {
     "/usr/include/i386-linux-gnu",
+
+    // GNU/kFreeBSD
+    "/usr/include/i386-kfreebsd-gnu",
 
     // FIXME: These are older forms of multiarch. It's not clear that they're
     // in use in any released version of Debian, so we should consider
