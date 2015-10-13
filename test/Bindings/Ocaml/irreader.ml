@@ -1,7 +1,7 @@
 (* RUN: rm -rf %t.builddir
  * RUN: mkdir -p %t.builddir
  * RUN: cp %s %t.builddir
- * RUN: %ocamlopt -g -warn-error A llvm.cmxa llvm_irreader.cmxa %t.builddir/irreader.ml -o %t
+ * RUN: %ocamlopt -g  llvm.cmxa llvm_irreader.cmxa %t.builddir/irreader.ml -o %t
  * RUN: %t
  * XFAIL: vg_leak
  *)
