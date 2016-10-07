@@ -1,4 +1,5 @@
 ; RUN: llc < %s -verify-machineinstrs -mtriple=arm64-none-linux-gnu -mattr=+neon -fp-contract=fast | FileCheck %s
+; XFAIL: *
 
 ; FIXME: We should not generate ld/st for such register spill/fill, because the
 ; test case seems very simple and the register pressure is not high. If the

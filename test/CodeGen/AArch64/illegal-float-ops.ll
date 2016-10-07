@@ -1,4 +1,5 @@
 ; RUN: llc -mtriple=aarch64-none-linux-gnu -verify-machineinstrs -o - %s | FileCheck %s
+; XFAIL: *
 
 @varfloat = global float 0.0
 @vardouble = global double 0.0

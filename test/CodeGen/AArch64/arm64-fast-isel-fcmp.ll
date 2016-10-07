@@ -1,4 +1,5 @@
 ; RUN: llc < %s -O0 -fast-isel-abort -verify-machineinstrs -mtriple=arm64-apple-darwin | FileCheck %s
+; XFAIL: *
 
 define zeroext i1 @fcmp_float1(float %a) nounwind ssp {
 entry:

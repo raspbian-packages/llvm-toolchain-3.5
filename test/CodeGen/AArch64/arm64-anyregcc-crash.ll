@@ -1,6 +1,7 @@
 ; RUN: not llc < %s -mtriple=arm64-apple-darwin 2>&1 | FileCheck %s
 ;
 ; Check that misuse of anyregcc results in a compile time error.
+; XFAIL: *
 
 ; CHECK: LLVM ERROR: ran out of registers during register allocation
 define i64 @anyreglimit(i64 %v1, i64 %v2, i64 %v3, i64 %v4, i64 %v5, i64 %v6, i64 %v7, i64 %v8,

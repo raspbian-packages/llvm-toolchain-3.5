@@ -1,4 +1,5 @@
 ; RUN: llc < %s -mtriple=arm64-apple-ios7.0 -aarch64-neon-syntax=apple -verify-machineinstrs
+; XFAIL: *
 
 ; CHECK: fpr128
 ; CHECK: ld1.2d

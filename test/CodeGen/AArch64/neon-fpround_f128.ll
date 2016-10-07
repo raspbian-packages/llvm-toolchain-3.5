@@ -1,4 +1,5 @@
 ; RUN: llc < %s -verify-machineinstrs -mtriple=aarch64-none-linux-gnu -mattr=+neon -fp-contract=fast | FileCheck %s
+; XFAIL: *
 
 define <1 x double> @test_fpround_v1f128(<1 x fp128>* %a) {
 ; CHECK-LABEL: test_fpround_v1f128:

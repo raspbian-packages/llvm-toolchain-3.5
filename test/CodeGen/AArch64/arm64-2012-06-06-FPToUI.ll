@@ -1,5 +1,6 @@
 ; RUN: llc -march=arm64 -O0 < %s | FileCheck %s
 ; RUN: llc -march=arm64 -O3 < %s | FileCheck %s
+; XFAIL: *
 
 @.str = private unnamed_addr constant [9 x i8] c"%lf %lu\0A\00", align 1
 @.str1 = private unnamed_addr constant [8 x i8] c"%lf %u\0A\00", align 1

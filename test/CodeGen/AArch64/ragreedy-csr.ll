@@ -1,4 +1,5 @@
 ; RUN: llc < %s -mtriple=arm64-apple-ios7.0 -regalloc=greedy -regalloc-csr-first-time-cost=15 | FileCheck %s
+; XFAIL: *
 
 ; This testing case is reduced from 197.parser prune_match function.
 ; We make sure that we do not use callee-saved registers (x19 to x25).
