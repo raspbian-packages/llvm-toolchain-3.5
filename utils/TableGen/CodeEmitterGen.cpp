@@ -241,6 +241,9 @@ void CodeEmitterGen::run(raw_ostream &o) {
   const std::vector<const CodeGenInstruction*> &NumberedInstructions =
     Target.getInstructionsByEnumValue();
 
+  o << "// Undef for HURD\n";
+  o << "#ifdef EIEIO\n#undef EIEIO\n#endif\n";
+
   // Emit function declaration
   o << "uint64_t " << Target.getName();
   if (MCEmitter)
