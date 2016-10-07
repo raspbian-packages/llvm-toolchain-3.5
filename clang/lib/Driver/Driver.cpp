@@ -1974,6 +1974,8 @@ const ToolChain &Driver::getToolChain(const ArgList &Args,
       TC = new toolchains::Minix(*this, Target, Args);
       break;
     case llvm::Triple::Linux:
+    case llvm::Triple::KFreeBSD: /* GNU/kFreeBSD is more
+      similar to a GNU/Linux install than a FreeBSD install */
       if (Target.getArch() == llvm::Triple::hexagon)
         TC = new toolchains::Hexagon_TC(*this, Target, Args);
       else
