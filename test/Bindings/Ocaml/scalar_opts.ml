@@ -1,7 +1,7 @@
 (* RUN: rm -rf %t.builddir
  * RUN: mkdir -p %t.builddir
  * RUN: cp %s %t.builddir
- * RUN: %ocamlopt -warn-error A llvm.cmxa llvm_scalar_opts.cmxa llvm_target.cmxa %t.builddir/scalar_opts.ml -o %t
+ * RUN: %ocamlopt  llvm.cmxa llvm_scalar_opts.cmxa llvm_target.cmxa %t.builddir/scalar_opts.ml -o %t
  * RUN: %t %t.bc
  * XFAIL: vg_leak
  *)
