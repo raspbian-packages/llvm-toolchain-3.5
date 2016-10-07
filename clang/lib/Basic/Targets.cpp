@@ -3650,33 +3650,6 @@ class ARMTargetInfo : public TargetInfo {
     // FIXME: Override "preferred align" for double and long long.
   }
 
-  static bool shouldUseInlineAtomic(const llvm::Triple &T) {
-    // On linux, binaries targeting old cpus call functions in libgcc to
-    // perform atomic operations. The implementation in libgcc then calls into
-    // the kernel which on armv6 and newer uses ldrex and strex. The net result
-    // is that if we assume the kernel is at least as recent as the hardware,
-    // it is safe to use atomic instructions on armv6 and newer.
-    if (T.getOS() != llvm::Triple::Linux)
-     return false;
-    StringRef ArchName = T.getArchName();
-    if (T.getArch() == llvm::Triple::arm) {
-      if (!ArchName.startswith("armv"))
-        return false;
-      StringRef VersionStr = ArchName.substr(4);
-      unsigned Version;
-      if (VersionStr.getAsInteger(10, Version))
-        return false;
-      return Version >= 6;
-    }
-    assert(T.getArch() == llvm::Triple::thumb);
-    if (!ArchName.startswith("thumbv"))
-      return false;
-    StringRef VersionStr = ArchName.substr(6);
-    unsigned Version;
-    if (VersionStr.getAsInteger(10, Version))
-      return false;
-    return Version >= 7;
-  }
 
 public:
   ARMTargetInfo(const llvm::Triple &Triple, bool IsBigEndian)
