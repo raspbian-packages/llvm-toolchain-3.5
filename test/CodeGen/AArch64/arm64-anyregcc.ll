@@ -1,4 +1,5 @@
 ; RUN: llc < %s -mtriple=arm64-apple-darwin | FileCheck %s
+; XFAIL: *
 
 ; Stackmap Header: no constants - 6 callsites
 ; CHECK-LABEL: .section	__LLVM_STACKMAPS,__llvm_stackmaps

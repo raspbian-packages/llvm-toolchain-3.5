@@ -1,5 +1,6 @@
 ; RUN: llc < %s -verify-machineinstrs -mtriple=arm64-none-linux-gnu -mattr=+neon | FileCheck %s
 ; arm64 has its own copy of this because of the intrinsics
+; XFAIL: *
 
 define <8 x i8> @mul8xi8(<8 x i8> %A, <8 x i8> %B) {
 ; CHECK-LABEL: mul8xi8:

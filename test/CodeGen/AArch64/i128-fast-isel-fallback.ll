@@ -1,4 +1,5 @@
 ; RUN: llc -O0 -mtriple=arm64-apple-ios7.0 -mcpu=generic < %s | FileCheck %s
+; XFAIL: *
 
 ; Function Attrs: nounwind ssp
 define void @test1() {

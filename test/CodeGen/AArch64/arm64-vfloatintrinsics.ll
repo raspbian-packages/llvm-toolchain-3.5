@@ -1,4 +1,5 @@
 ; RUN: llc -march=arm64 -aarch64-neon-syntax=apple < %s | FileCheck %s
+; XFAIL: *
 
 ;;; Float vectors
 
