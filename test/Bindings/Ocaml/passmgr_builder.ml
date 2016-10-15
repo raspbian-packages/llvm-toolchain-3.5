@@ -1,7 +1,7 @@
 (* RUN: rm -rf %t.builddir
  * RUN: mkdir -p %t.builddir
  * RUN: cp %s %t.builddir
- * RUN: %ocamlopt -warn-error A llvm.cmxa llvm_passmgr_builder.cmxa %t.builddir/passmgr_builder.ml -o %t
+ * RUN: %ocamlopt  llvm.cmxa llvm_passmgr_builder.cmxa %t.builddir/passmgr_builder.ml -o %t
  * RUN: %t %t.bc
  * XFAIL: vg_leak
  *)
