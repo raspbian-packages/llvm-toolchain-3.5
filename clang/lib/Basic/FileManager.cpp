@@ -485,6 +485,10 @@ void FileManager::invalidateCache(const FileEntry *Entry) {
   UniqueRealFiles.erase(Entry->getUniqueID());
 }
 
+// For GNU Hurd
+#if defined(__GNU__) && !defined(PATH_MAX)
+# define PATH_MAX 4096
+#endif
 
 void FileManager::GetUniqueIDMapping(
                    SmallVectorImpl<const FileEntry *> &UIDToFiles) const {
