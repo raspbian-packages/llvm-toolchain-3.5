@@ -1,0 +1,5 @@
+# as upstream
+usr/lib/arm-linux-gnueabihf/libclang-3.5.so.1 usr/lib/llvm-3.5/lib/libclang-3.5.so.1
+# Compatibility for the ABI breakage (See #762959)
+usr/lib/arm-linux-gnueabihf/libclang-3.5.so.1 usr/lib/arm-linux-gnueabihf/libclang.so.1
+
