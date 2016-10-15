@@ -14,6 +14,7 @@ EXPORTED_SYMBOL_FILE = $(PROJ_SRC_DIR)/libclang.exports
 
 LINK_LIBS_IN_SHARED = 1
 SHARED_LIBRARY = 1
+SONAME_MAJOR=1
 
 include $(CLANG_LEVEL)/../../Makefile.config
 LINK_COMPONENTS := $(TARGETS_TO_BUILD) asmparser bitreader support mc option
@@ -34,7 +35,7 @@ include $(CLANG_LEVEL)/Makefile
 
 # Add soname to the library.
 ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux FreeBSD GNU GNU/kFreeBSD))
-        LLVMLibsOptions += -Wl,-soname,lib$(LIBRARYNAME)$(SHLIBEXT)
+        LLVMLibsOptions += -Wl,-soname,lib$(LIBRARYNAME)-$(LLVM_VERSION_MAJOR).$(LLVM_VERSION_MINOR)$(SHLIBEXT).$(SONAME_MAJOR)
 endif
 
 ifeq ($(ENABLE_CLANG_ARCMT),1)
