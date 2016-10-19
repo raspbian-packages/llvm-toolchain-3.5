@@ -29,6 +29,11 @@ else
 LIT_ARGS := -s -v
 endif
 
+# NJOBS allows an override of the number of threads
+ifneq ($(NJOBS),)
+LIT_ARGS += $(NJOBS)
+endif
+
 ifdef TESTSUITE
 LIT_TESTSUITE := $(TESTSUITE)
 else
