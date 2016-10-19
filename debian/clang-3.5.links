@@ -1,0 +1,3 @@
+usr/share/clang/scan-build-3.5/scan-build  usr/bin/scan-build-3.5
+usr/share/clang/scan-view-3.5/scan-view    usr/bin/scan-view-3.5
+
