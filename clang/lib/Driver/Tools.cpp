@@ -7177,6 +7177,12 @@ static void AddLibgcc(const llvm::Triple &Triple, const Driver &D,
 
 static StringRef getLinuxDynamicLinker(const ArgList &Args,
                                        const toolchains::Linux &ToolChain) {
+#ifdef __FreeBSD_kernel__
+  if (ToolChain.getArch() == llvm::Triple::x86)
+    return "/lib/ld.so.1";
+  else
+    return "/lib/ld-kfreebsd-x86-64.so.1";
+#else
   if (ToolChain.getTriple().getEnvironment() == llvm::Triple::Android) {
     if (ToolChain.getTriple().isArch64Bit())
       return "/system/bin/linker64";
@@ -7229,6 +7235,7 @@ static StringRef getLinuxDynamicLinker(const ArgList &Args,
     return "/libx32/ld-linux-x32.so.2";
   else
     return "/lib64/ld-linux-x86-64.so.2";
+#endif
 }
 
 static void AddRunTimeLibs(const ToolChain &TC, const Driver &D,
@@ -7296,6 +7303,11 @@ void gnutools::Link::ConstructJob(Compilation &C, const JobAction &JA,
 
   CmdArgs.push_back("-m");
   if (ToolChain.getArch() == llvm::Triple::x86)
+#ifdef __FreeBSD_kernel__
+    CmdArgs.push_back("elf_i386_fbsd");
+  else
+    CmdArgs.push_back("elf_x86_64_fbsd");
+#else
     CmdArgs.push_back("elf_i386");
   else if (ToolChain.getArch() == llvm::Triple::aarch64 ||
            ToolChain.getArch() == llvm::Triple::arm64)
@@ -7342,6 +7354,7 @@ void gnutools::Link::ConstructJob(Compilation &C, const JobAction &JA,
     CmdArgs.push_back("elf32_x86_64");
   else
     CmdArgs.push_back("elf_x86_64");
+#endif
 
   if (Args.hasArg(options::OPT_static)) {
     if (ToolChain.getArch() == llvm::Triple::arm ||
