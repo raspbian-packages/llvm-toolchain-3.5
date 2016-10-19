@@ -41,6 +41,12 @@ LLVMLibsOptions := $(IncludeInLibLlvm:$(LibDir)/lib%.a=-l%)
 LLVMLibsPaths   := $(IncludeInLibLlvm)
 
 $(LibName.SO): $(LLVMLibsPaths)
+	$(Echo) Linking $(BuildMode) $(SharedLibKindMessage) \
+	  $(LIBRARYNAME)$(SHLIBEXT)
+	$(Verb) $(Link) $(SharedLinkOptions) -o $@ $(ObjectsO) \
+	  $(ProjLibsOptions) $(LLVMLibsOptions) $(LIBS)
+	mv $(LibName.SO) $(LibName.SO).1
+	ln -s $(notdir $(LibName.SO)).1 $(LibName.SO)
 
 ifeq ($(HOST_OS),Darwin)
     # set dylib internal version number to llvmCore submission number
@@ -61,7 +67,7 @@ endif
 
 ifeq ($(HOST_OS), $(filter $(HOST_OS), DragonFly Linux FreeBSD GNU/kFreeBSD GNU))
     # Add soname to the library.
-    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT)
+    LLVMLibsOptions += -Wl,--soname,lib$(LIBRARYNAME)$(SHLIBEXT) -Wl,-Bsymbolic-functions
 endif
 
 ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux GNU GNU/kFreeBSD))
