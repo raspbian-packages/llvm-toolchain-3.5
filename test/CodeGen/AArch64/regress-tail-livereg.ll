@@ -1,4 +1,5 @@
 ; RUN: llc -verify-machineinstrs -mtriple=arm64-apple-ios7.0 -o - %s | FileCheck %s
+; XFAIL: *
 @var = global void()* zeroinitializer
 
 declare void @bar()

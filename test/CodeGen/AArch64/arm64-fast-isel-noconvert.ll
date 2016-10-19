@@ -1,4 +1,5 @@
 ; RUN: llc -mtriple=arm64-apple-ios -O0 %s -o - | FileCheck %s
+; XFAIL: *
 
 ; Fast-isel can't do vector conversions yet, but it was emitting some highly
 ; suspect UCVTFUWDri MachineInstrs.

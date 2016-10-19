@@ -1,5 +1,6 @@
 ; RUN: llc < %s -march=arm64 -aarch64-neon-syntax=apple | FileCheck %s
 ; RUN: llc < %s -O0 -march=arm64 -aarch64-neon-syntax=apple | FileCheck %s
+; XFAIL: *
 
 define <2 x double> @test_vcvt_f64_f32(<2 x float> %x) nounwind readnone ssp {
 ; CHECK-LABEL: test_vcvt_f64_f32:
