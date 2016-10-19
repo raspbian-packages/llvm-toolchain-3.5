@@ -12,6 +12,9 @@ TOOLNAME := bugpoint
 LINK_COMPONENTS := asmparser instrumentation scalaropts ipo linker bitreader \
                    bitwriter irreader vectorize objcarcopts codegen
 
+# Crappy workaround to make sure it links correctly.
+LLVMLibsOptions := ../../lib/IR/Release*/Pass.o
+
 # Support plugins.
 NO_DEAD_STRIP := 1
 
