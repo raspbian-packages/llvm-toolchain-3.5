@@ -1627,8 +1627,8 @@ for ia in range(len(archs) if iterArchs else 1):
             def addSuccess(self, test):
                 global parsable
                 super(LLDBTestResult, self).addSuccess(test)
-                if parsable:
-                    self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
+#                if parsable:
+#                    self.stream.write("PASS: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
 
             def addError(self, test, err):
                 global sdir_has_content
@@ -1668,8 +1668,8 @@ for ia in range(len(archs) if iterArchs else 1):
                 method = getattr(test, "markExpectedFailure", None)
                 if method:
                     method(err, bugnumber)
-                if parsable:
-                    self.stream.write("XFAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
+#                if parsable:
+#                    self.stream.write("XFAIL: LLDB (%s) :: %s\n" % (self._config_string(test), str(test)))
 
             def addSkip(self, test, reason):
                 global sdir_has_content
@@ -1679,8 +1679,8 @@ for ia in range(len(archs) if iterArchs else 1):
                 method = getattr(test, "markSkippedTest", None)
                 if method:
                     method()
-                if parsable:
-                    self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
+#                if parsable:
+#                    self.stream.write("UNSUPPORTED: LLDB (%s) :: %s (%s) \n" % (self._config_string(test), str(test), reason))
 
             def addUnexpectedSuccess(self, test, bugnumber):
                 global sdir_has_content
