@@ -13,7 +13,7 @@ include $(LLDB_LEVEL)/../../Makefile.config
 DIRS:=
 
 # only build the readline suppression module on Linux
-ifeq ($(HOST_OS), Linux)
+ifeq ($(HOST_OS), $(filter $(HOST_OS), Linux GNU GNU/kFreeBSD))
 DIRS += readline
 endif
 
